@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "experimentalServices": {
+    "frontend": {
+      "entrypoint": "frontend",
+      "routePrefix": "/",
+      "framework": "vite"
+    },
+    "backend": {
+      "entrypoint": "backend",
+      "routePrefix": "/_/backend"
+    }
+  },
+  "buildCommand": "npm install --workspaces",
+  "installCommand": "npm install --workspaces",
+  "env": {
+    "VITE_API_URL": "@vite_api_url",
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_KEY": "@supabase_key",
+    "SECRET_KEY": "@secret_key",
+    "GROQ_API_KEY": "@groq_api_key"
+  }
+}
