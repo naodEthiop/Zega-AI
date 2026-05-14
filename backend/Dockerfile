@@ -1,7 +1,24 @@
-FROM node:20
+# Backend Dockerfile
+FROM python:3.11-slim
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
 COPY . .
-EXPOSE 3000
-CMD ["npx", "nodemon", "src/server.js"]
+
+# Expose port
+EXPOSE 8000
+
+# Run the application
+CMD ["python", "-m", "uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
